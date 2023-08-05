@@ -28,7 +28,10 @@ export class AuthService {
       nickname,
       isAdmin,
     };
-    const authToken = await this.jwtService.signAsync(payload);
+    const authToken = await this.jwtService.sign(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: '1h',
+    });
 
     return {
       ...payload,
