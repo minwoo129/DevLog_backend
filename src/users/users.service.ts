@@ -33,6 +33,16 @@ export class UsersService {
     return result;
   }
 
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    const result = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!result) return null;
+    return result;
+  }
+
   async createUser(userData: CreateUserDTO): Promise<UserEntity> {
     const user = await this.userRepository.findOne({
       where: {
